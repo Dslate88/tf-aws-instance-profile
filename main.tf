@@ -1,10 +1,10 @@
 resource "aws_iam_instance_profile" "main" {
-  name = "test_profile"
+  name = "${var.iam_name_prefix}_profile"
   role = aws_iam_role.instance.name
 }
 
 resource "aws_iam_role" "instance" {
-  name               = "instance_role"
+  name               = "${var.iam_name_prefix}_role"
   assume_role_policy = data.aws_iam_policy_document.assume-role-policy.json
   inline_policy {
     name   = "policy-inline-1"

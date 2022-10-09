@@ -1,4 +1,4 @@
-variable "role_name" {
+variable "iam_name_prefix" {
   type = string
 }
 
