@@ -7,7 +7,7 @@ locals {
 # TODO i should used stack_name as the naming variable in main.tf
 module "iam_role" {
   source               = "./.."
-  iam_name_prefix      = local.iam_name_prefix #
+  iam_name_prefix      = local.iam_name_prefix
   stack_name           = local.stack_name
   s3_bucket_name       = local.s3_bucket_name
   addl_policy_document = data.aws_iam_policy_document.additional.json
