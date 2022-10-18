@@ -4,7 +4,6 @@ locals {
   s3_bucket_name  = "account-junk-nonversioned"
 }
 
-# TODO: this repo should be priv-instance-profile renamed?
 # TODO: research the dynamic keyword, pass multi inlines
 module "iam_role" {
   source          = "./.."
