@@ -10,7 +10,6 @@ variable "stack_name" {
   type = string
 }
 
-variable "managed_policy_arns" {
-  type    = list(string)
-  default = []
+variable "addl_policy_document" {
+  type = string
 }

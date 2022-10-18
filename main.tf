@@ -8,13 +8,27 @@ resource "aws_iam_role" "instance" {
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
   inline_policy {
     name   = "policy-inline-1"
-    policy = data.aws_iam_policy_document.inline_policy.json
+    policy = data.aws_iam_policy_document.default.json
   }
+}
+
+resource "aws_iam_policy" "instance" {
+  name        = "${var.iam_name_prefix}_policy"
+  path        = "/"
+  description = "${var.stack_name}_policy for instance profile"
+  policy      = data.aws_iam_policy_document.combined.json
+}
+
+data "aws_iam_policy_document" "combined" {
+  source_policy_documents = [
+    data.aws_iam_policy_document.default.json,
+    var.addl_policy_document
+  ]
 }
 
 data "aws_iam_policy_document" "assume_role_policy" {
   statement {
-    sid = ""
+    sid = "AssumeEc2"
     actions = [
       "sts:AssumeRole",
     ]
@@ -26,9 +40,9 @@ data "aws_iam_policy_document" "assume_role_policy" {
   }
 }
 
-data "aws_iam_policy_document" "inline_policy" {
+data "aws_iam_policy_document" "default" {
   statement {
-    sid = "1"
+    sid = "Default"
     actions = [
       "s3:ListAllMyBuckets",
       "s3:GetBucketLocation",
@@ -37,7 +51,6 @@ data "aws_iam_policy_document" "inline_policy" {
       "arn:aws:s3:::*",
     ]
   }
-
   statement {
     actions = [
       "s3:ListBucket",
@@ -55,7 +68,6 @@ data "aws_iam_policy_document" "inline_policy" {
       ]
     }
   }
-
   statement {
     actions = [
       "s3:*",
