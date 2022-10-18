@@ -5,14 +5,14 @@ resource "aws_iam_instance_profile" "main" {
 
 resource "aws_iam_role" "instance" {
   name               = "${var.iam_name_prefix}_role"
-  assume_role_policy = data.aws_iam_policy_document.assume-role-policy.json
+  assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
   inline_policy {
     name   = "policy-inline-1"
     policy = data.aws_iam_policy_document.inline_policy.json
   }
 }
 
-data "aws_iam_policy_document" "assume-role-policy" {
+data "aws_iam_policy_document" "assume_role_policy" {
   statement {
     sid = ""
     actions = [
