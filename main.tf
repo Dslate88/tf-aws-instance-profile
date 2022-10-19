@@ -85,8 +85,8 @@ data "aws_iam_policy_document" "default" {
       "s3:*",
     ]
     resources = [
-      "arn:aws:s3:::${var.s3_bucket_name}/ec2/${var.stack_name}",
-      "arn:aws:s3:::${var.s3_bucket_name}/ec2/${var.stack_name}/*",
+      "arn:aws:s3:::${var.s3_bucket_name}/ec2/${var.env}/${var.stack_name}",
+      "arn:aws:s3:::${var.s3_bucket_name}/ec2/${var.env}/${var.stack_name}/*",
     ]
   }
 }
