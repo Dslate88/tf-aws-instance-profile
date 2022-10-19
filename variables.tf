@@ -1,9 +1,6 @@
 variable "env" {
-  type = string
-}
-
-variable "iam_name_prefix" {
-  type = string
+  type        = string
+  description = "[dev/test/prod] identification"
 }
 
 variable "s3_bucket_name" {
@@ -11,7 +8,8 @@ variable "s3_bucket_name" {
 }
 
 variable "stack_name" {
-  type = string
+  type        = string
+  description = "Name of the stack responsible for deploying the resource"
 }
 
 variable "addl_policy_document" {
