@@ -1,15 +1,22 @@
 resource "aws_iam_instance_profile" "main" {
   name = "${var.iam_name_prefix}_profile"
   role = aws_iam_role.instance.name
+  tags = {
+    Stack = var.stack_name,
+    Env   = var.env
+  }
 }
 
 resource "aws_iam_role" "instance" {
   name               = "${var.iam_name_prefix}_role"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
   inline_policy {
-    name = "policy-inline-1"
-    # policy = data.aws_iam_policy_document.default.json
+    name   = "policy-inline-1"
     policy = data.aws_iam_policy_document.combined.json
+  }
+  tags = {
+    Stack = var.stack_name,
+    Env   = var.env
   }
 }
 
@@ -18,6 +25,10 @@ resource "aws_iam_policy" "instance" {
   path        = "/"
   description = "${var.stack_name}_policy for instance profile"
   policy      = data.aws_iam_policy_document.combined.json
+  tags = {
+    Stack = var.stack_name,
+    Env   = var.env
+  }
 }
 
 data "aws_iam_policy_document" "combined" {
