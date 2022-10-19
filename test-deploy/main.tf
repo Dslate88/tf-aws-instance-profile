@@ -1,14 +1,13 @@
 locals {
-  stack_name = "test"
-  env        = "dev"
-
+  env            = "dev"
+  stack_name     = "test_instance_profile"
   s3_bucket_name = "account-junk-nonversioned"
 }
 
 module "instance_profile" {
   source               = "./.."
-  env                  = local.env
   stack_name           = local.stack_name
+  env                  = local.env
   s3_bucket_name       = local.s3_bucket_name
   addl_policy_document = data.aws_iam_policy_document.additional.json
 }
