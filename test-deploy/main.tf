@@ -1,12 +1,15 @@
 locals {
+  stack_name = "test"
+  env        = "dev"
+
   iam_name_prefix = "test_deploy"
-  stack_name      = "test_iam_role"
   s3_bucket_name  = "account-junk-nonversioned"
 }
 
 # TODO i should used stack_name as the naming variable in main.tf
-module "iam_role" {
+module "instance_profile" {
   source               = "./.."
+  env                  = local.env
   iam_name_prefix      = local.iam_name_prefix
   stack_name           = local.stack_name
   s3_bucket_name       = local.s3_bucket_name
