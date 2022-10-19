@@ -7,8 +7,9 @@ resource "aws_iam_role" "instance" {
   name               = "${var.iam_name_prefix}_role"
   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
   inline_policy {
-    name   = "policy-inline-1"
-    policy = data.aws_iam_policy_document.default.json
+    name = "policy-inline-1"
+    # policy = data.aws_iam_policy_document.default.json
+    policy = data.aws_iam_policy_document.combined.json
   }
 }
 
