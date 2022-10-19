@@ -6,7 +6,6 @@ locals {
   s3_bucket_name  = "account-junk-nonversioned"
 }
 
-# TODO i should used stack_name as the naming variable in main.tf
 module "instance_profile" {
   source               = "./.."
   env                  = local.env
@@ -16,6 +15,7 @@ module "instance_profile" {
   addl_policy_document = data.aws_iam_policy_document.additional.json
 }
 
+# additional policy merged into module default
 data "aws_iam_policy_document" "additional" {
   statement {
     sid = "TestSid"
